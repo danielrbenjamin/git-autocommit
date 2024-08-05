@@ -11,6 +11,6 @@ For both installation options, you must first install Watchman on Windows from e
 * run autoinstall.ps1 in the desired git repo directory
 
 2. Manual Install Option:
-* Copy the .watchmanconfig file and autoGitCommit.ps1 into the desired directory
+* Copy the .watchmanconfig file and autoGitCommit.ps1 into the desired directory, making sure to CHANGE PROJECTDIRECTORY on autoGitCommit.ps1 to actual file path
 * In PowerShell, run `watchman watch .` in the desired directory
 * Then `run watchman -- trigger "PROJECTDIRECTORY" save-trigger '**/*' -- powershell -ExecutionPolicy Bypass -File "PROJECTDIRECTORY\autoGitCommit.ps1"`, replacing PROJECTDIRECTORY with the actual file path
