@@ -16,14 +16,19 @@ Set-Content -Path $watchmanConfigPath -Value $watchmanConfigContent -Force
 
 # Create autoGitCommit.ps1 script
 $autoCommitScriptContent = @"
+# Check for pause file
+if (Test-Path -Path `"$projectDir\New Text Document.txt`") {
+    exit
+}
+
 # Navigate to the project directory
-cd "$projectDir"
+cd `"$projectDir`"
 
 # Add all changes
 git add -A
 
-# Commit changes with a timestamp message
-git commit -m "Auto-commit: $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')"
+# Commit added changes with a timestamp message
+git commit -m `"Auto-commit: $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')`"
 "@
 Set-Content -Path $autoCommitScriptPath -Value $autoCommitScriptContent -Force
 
