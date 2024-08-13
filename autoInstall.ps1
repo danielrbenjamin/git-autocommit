@@ -33,13 +33,13 @@ git commit -m `"Auto-commit: $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')`"
 Set-Content -Path $autoCommitScriptPath -Value $autoCommitScriptContent -Force
 
 # Start watching the directory with Watchman
-& watchman watch $projectDir
+& watchman watch "`"$projectDir`""
 
 # Remove existing trigger if it exists
-& watchman trigger-del $projectDir $triggerName
+& watchman trigger-del "`"$projectDir`"" $triggerName
 
 # Create a new Watchman trigger to run the script with ExecutionPolicy Bypass
-$watchmanTriggerCommand = "watchman -- trigger $projectDir $triggerName '**/*' -- powershell -ExecutionPolicy Bypass -File $autoCommitScriptPath"
+$watchmanTriggerCommand = "watchman -- trigger `"$projectDir`" $triggerName '**/*' -- powershell -ExecutionPolicy Bypass -File `"$autoCommitScriptPath`""
 Invoke-Expression $watchmanTriggerCommand
 
 Write-Host "Setup completed. Watchman is now watching the directory and will auto-commit changes."
