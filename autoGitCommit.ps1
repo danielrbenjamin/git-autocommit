@@ -1,5 +1,5 @@
 # Check for pause file
-if (Test-Path -Path "PROJECTDIRECTORY") {
+if (Test-Path -Path "PROJECTDIRECTORY\New Text Document.txt") {
     exit
 }
 
