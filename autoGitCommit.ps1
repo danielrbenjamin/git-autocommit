@@ -1,5 +1,10 @@
+# Check for pause file
+if (Test-Path -Path "C:\Users\danie\Documents\Documents\Education\UBC\Miscellaneous\ECs\MEMS\Fenrir Hand v1\New Text Document.txt") {
+    exit
+}
+
 # Navigate to the project directory
-cd "PROJECT DIRECTORY"
+cd "C:\Users\danie\Documents\Documents\Education\UBC\Miscellaneous\ECs\MEMS\Fenrir Hand v1"
 
 # Add all changes
 git add -A
