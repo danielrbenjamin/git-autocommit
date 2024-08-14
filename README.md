@@ -13,7 +13,13 @@ For both installation options, you must first install Watchman on Windows from e
 
   OR
 
-  Just run `iex "& { $(iwr -useb 'https://raw.githubusercontent.com/danielrbenjamin/git-autocommit/main/autoInstall.ps1') }"` in the desired directory
+  Just run the following powershell command in the desired directory:
+
+  `
+$tempScript = Join-Path $env:TEMP "autoInstall.ps1"
+iwr -useb 'https://raw.githubusercontent.com/danielrbenjamin/git-autocommit/main/autoInstall.ps1' -OutFile $tempScript
+powershell -ExecutionPolicy Bypass -File $tempScript
+  `
   
 2. Manual Install Option:
 * Copy the `.watchmanconfig` and `autoGitCommit.ps1` files into the desired directory, replacing PROJECTDIRECTORY with the actual file path
