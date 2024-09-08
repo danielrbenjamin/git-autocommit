@@ -8,7 +8,7 @@ Dependent on [Facebook Watchman]([url](https://github.com/facebook/watchman))
 For both installation options, you must first install Watchman on Windows from either the [latest release](https://github.com/facebook/watchman/releases/latest) or using [Chocolatey](https://community.chocolatey.org/packages/watchman)
 
 1. Automatic Install Option:
-* copy and run `autoInstall.ps1` in the desired git repo directory
+* download and run `autoInstall.ps1` in the desired git repo directory
 * depending on script permissions, may need to run `powershell -ExecutionPolicy Bypass -File autoInstall.ps1`
 
   OR
