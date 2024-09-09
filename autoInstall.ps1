@@ -21,23 +21,23 @@ if (Test-Path -Path `"$projectDir\New Text Document.txt`") {
     exit
 }
 
-# Navigate to the project directory
-cd `"$projectDir`"
-
 # Get the names of changed files
-\$changedFiles = git status --porcelain | ForEach-Object { 
-    \$_.Substring(3) 
-} | Out-String
+$changedFiles = git status --porcelain | ForEach-Object { $_.Substring(3) } | Out-String
 
 # Add all changes
 git add -A
 
 # Commit added changes with a timestamp and list of changed files
-if (-not [string]::IsNullOrWhiteSpace(\$changedFiles)) {
-    \$commitMessage = \"Auto-commit: $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')`nChanged files:`n\$changedFiles\"
-    git commit -m \$commitMessage
+if (-not [string]::IsNullOrWhiteSpace($changedFiles)) {
+
+    $commitMessage = "Auto-commit: $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')`nChanged files:`n$changedFiles"
+
+    git commit -m $commitMessage
+
 }
+
 "@
+
 Set-Content -Path $autoCommitScriptPath -Value $autoCommitScriptContent -Force
 
 # Start watching the directory with Watchman
