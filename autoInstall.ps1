@@ -24,11 +24,19 @@ if (Test-Path -Path `"$projectDir\New Text Document.txt`") {
 # Navigate to the project directory
 cd `"$projectDir`"
 
+# Get the names of changed files
+\$changedFiles = git status --porcelain | ForEach-Object { 
+    \$_.Substring(3) 
+} | Out-String
+
 # Add all changes
 git add -A
 
-# Commit added changes with a timestamp message
-git commit -m `"Auto-commit: $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')`"
+# Commit added changes with a timestamp and list of changed files
+if (-not [string]::IsNullOrWhiteSpace(\$changedFiles)) {
+    \$commitMessage = \"Auto-commit: $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')`nChanged files:`n\$changedFiles\"
+    git commit -m \$commitMessage
+}
 "@
 Set-Content -Path $autoCommitScriptPath -Value $autoCommitScriptContent -Force
 
