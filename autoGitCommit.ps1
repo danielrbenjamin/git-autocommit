@@ -1,5 +1,5 @@
 # Define project directory
-$projectDirectory = "C:\Users\danie\Downloads\test folder"
+$projectDirectory = "projectDirectory"
 
 # Check for pause file
 if (Test-Path -Path "$projectDirectory\.autogitpause") {
