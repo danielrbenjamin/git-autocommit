@@ -7,6 +7,9 @@ if (-not (Get-Command watchman -ErrorAction SilentlyContinue)) {
 # Define project directory as the current location
 $projectDir = Get-Location
 
+# Convert the path to use forward slashes
+$projectDirForwardSlashes = $projectDir -replace '\\', '/'
+
 # Paths to the config and script files
 $watchmanConfigPath = Join-Path $projectDir ".watchmanconfig"
 $autoCommitScriptPath = Join-Path $projectDir "autoGitCommit.ps1"
@@ -34,17 +37,17 @@ try {
     exit
 }
 
-# Start watching the directory with Watchman
+# Start watching the directory with Watchman (use forward slashes)
 try {
-    & watchman watch "$projectDir"
+    & watchman watch "$projectDirForwardSlashes"
     Write-Host "Watchman is now watching the directory."
 } catch {
     Write-Host "Failed to start watching the directory with Watchman."
     exit
 }
 
-# Create a new Watchman trigger to run the script with ExecutionPolicy Bypass
-$watchmanTriggerCommand = "watchman -- trigger $projectDir $triggerName '**/*' -- powershell -ExecutionPolicy Bypass -File $autoCommitScriptPath"
+# Create a new Watchman trigger to run the script with ExecutionPolicy Bypass (use forward slashes)
+$watchmanTriggerCommand = "watchman -- trigger $projectDirForwardSlashes $triggerName '**/*' -- powershell -ExecutionPolicy Bypass -File `"$autoCommitScriptPath`""
 try {
     Invoke-Expression $watchmanTriggerCommand
     Write-Host "Watchman trigger created successfully."
