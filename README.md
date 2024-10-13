@@ -9,9 +9,8 @@ For both installation options, you must first install Watchman on Windows from e
 The target directory should already be a git repo.
 
 1. Automatic Install Option:
-* download and run `autoInstall.ps1` in the desired git repo directory
-* depending on script permissions, may need to run `powershell -ExecutionPolicy Bypass -File autoInstall.ps1`
-  
+* run `Invoke-WebRequest -Uri "https://raw.githubusercontent.com/danielrbenjamin/git-autocommit/023e2b220ba33b133f5060a19a4e6c708c6fadca/autoInstall.ps1" -OutFile "$env:TEMP\autoInstall.ps1"; powershell -ExecutionPolicy Bypass -File "$env:TEMP\autoInstall.ps1"` in the desired git repo directory
+
 2. Manual Install Option:
 * Copy the `.watchmanconfig` and `autoGitCommit.ps1` files into the desired directory, replacing `projectDirectory` with the actual file path
 * In PowerShell, run `watchman watch .` in the desired directory
