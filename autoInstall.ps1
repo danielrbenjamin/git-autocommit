@@ -36,7 +36,7 @@ try {
 
 # Start watching the directory with Watchman
 try {
-    & watchman watch "$projectDir"
+    & watchman watch-project .
     Write-Host "Watchman is now watching the directory."
 } catch {
     Write-Host "Failed to start watching the directory with Watchman."
