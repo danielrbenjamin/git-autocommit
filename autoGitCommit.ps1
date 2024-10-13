@@ -21,4 +21,5 @@ git add -A
 
 # Commit added changes with a timestamp and list of changed files with their status
 $commitMessage = "Auto-commit: $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')`nFiles changed:`n$($changedFiles -join "`n")"
+
 git commit -m "$commitMessage"
