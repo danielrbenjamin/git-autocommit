@@ -1,19 +1,20 @@
-# Define project directory
-$projectDirectory = "projectDirectory"
+# Define project directory as the current location
+$projectDirectory = Get-Location
 
-# Check for pause file
-if (Test-Path -Path "$projectDirectory\.autogitpause") {
+# Check if this is a git repository (i.e., if .git folder exists)
+if (-not (Test-Path "$projectDirectory\.git")) {
+    Write-Host "This directory is not a git repository."
     exit
 }
 
-# Navigate to the project directory
-cd $projectDirectory
-
-# Get the list of changed files along with their status (e.g., M = Modified, A = Added, D = Deleted)
-$changedFiles = git status --porcelain | ForEach-Object {
-    $status, $file = $_ -split '\s+', 2
-    "{0}: {1}" -f $status, $file
+# Check for pause file
+if (Test-Path -Path "$projectDirectory\.autogitpause") {
+    Write-Host "Autogit is paused. Exiting..."
+    exit
 }
+
+# Get the list of changed files along with their status
+$changedFiles = git status --porcelain
 
 # Add all changes
 git add -A
