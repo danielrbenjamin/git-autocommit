@@ -13,8 +13,8 @@ $autoCommitScriptPath = Join-Path $projectDir "autoGitCommit.ps1"
 $triggerName = "autoGitCommit"
 
 # URLs of the autoGitCommit.ps1 and .watchmanconfig files on GitHub
-$autoCommitUrl = "https://raw.githubusercontent.com/danielrbenjamin/git-autocommit/77a0cef2dcc10f47982ad74f806818a6c9e8a786/autoGitCommit.ps1"
-$watchmanConfigUrl = "https://raw.githubusercontent.com/danielrbenjamin/git-autocommit/77a0cef2dcc10f47982ad74f806818a6c9e8a786/.watchmanconfig"
+$autoCommitUrl = "https://raw.githubusercontent.com/danielrbenjamin/git-autocommit/refs/heads/main/autoGitCommit.ps1"
+$watchmanConfigUrl = "https://raw.githubusercontent.com/danielrbenjamin/git-autocommit/refs/heads/main/.watchmanconfig"
 
 # Download the autoGitCommit.ps1 script from GitHub
 try {
