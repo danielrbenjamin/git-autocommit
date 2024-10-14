@@ -45,7 +45,7 @@ try {
 
 # Create a new Watchman trigger to run the script with ExecutionPolicy Bypass
 # Escape quotes for Watchman and PowerShell
-$watchmanTriggerCommand = "watchman -- trigger `"$projectDir`" $triggerName '**/*' -- powershell -ExecutionPolicy Bypass -File `"$autoCommitScriptPath`""
+$watchmanTriggerCommand = "watchman -- trigger `"$($projectDir)`" $triggerName '**/*' -- powershell -ExecutionPolicy Bypass -File `"$($autoCommitScriptPath)`""
 try {
     Invoke-Expression $watchmanTriggerCommand
     Write-Host "Watchman trigger created successfully."
