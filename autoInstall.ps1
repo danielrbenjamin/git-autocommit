@@ -4,12 +4,15 @@ if (-not (Get-Command watchman -ErrorAction SilentlyContinue)) {
     exit
 }
 
-# Define project directory as the current location
+# Define project directory as the current locations
 $projectDir = Get-Location
+$quotedProjectDir = "`"$projectDir`""
 
 # Paths to the config and script files
 $watchmanConfigPath = Join-Path $projectDir ".watchmanconfig"
 $autoCommitScriptPath = Join-Path $projectDir "autoGitCommit.ps1"
+$quotedautoCommitScriptPath = "`"$autoCommitScriptPath`""
+
 $triggerName = "autoGitCommit"
 
 # URLs of the autoGitCommit.ps1 and .watchmanconfig files on GitHub
@@ -45,7 +48,7 @@ try {
 
 # Create a new Watchman trigger to run the script with ExecutionPolicy Bypass
 # Escape quotes for Watchman and PowerShell
-$watchmanTriggerCommand = "watchman -- trigger $projectDir $triggerName '**/*' -- powershell -ExecutionPolicy Bypass -File $autoCommitScriptPath"
+$watchmanTriggerCommand = "watchman -- trigger $quotedProjectDir $triggerName '**/*' -- powershell -ExecutionPolicy Bypass -File $quotedautoCommitScriptPath"
 try {
     Invoke-Expression $watchmanTriggerCommand
     Write-Host "Watchman trigger created successfully."
@@ -53,9 +56,5 @@ try {
     Write-Host "Failed to create Watchman trigger."
     exit
 }
-
-Write-Output $watchmanTriggerCommand
-
-
 
 Write-Host "Setup completed. Watchman is now watching the directory and will auto-commit changes."
