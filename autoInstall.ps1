@@ -54,4 +54,8 @@ try {
     exit
 }
 
+Write-Output $watchmanTriggerCommand
+
+
+
 Write-Host "Setup completed. Watchman is now watching the directory and will auto-commit changes."
